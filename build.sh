@@ -12,7 +12,8 @@ wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | sudo apt-key ad
 sudo wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list
 sudo apt-get update && sudo apt-get install s3cmd
 
-vagrant up --provider=aws 2> /dev/null || echo
+vagrant up --provider=aws 2> /dev/null || true
+vagrant ssh -c 'sed -i /requiretty/d /etc/sudoers' || true
 vagrant ssh-config > .vagrant.ssh.config
 scp -F .vagrant.ssh.config build-rpm.sh ruby200.spec default:~/
 vagrant ssh -c '/bin/bash ~/build-rpm.sh'
