@@ -1,6 +1,4 @@
 #!/bin/bash
-set -v
-
 function install_vagrant {
   wget -q $VAGRANT_URL
   sudo dpkg -i `basename $VAGRANT_URL`
