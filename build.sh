@@ -12,12 +12,10 @@ function install_ec2_key {
   chmod 600 $EC2_KEY_NAME
 }
 
-function install_s3cmd {
-  wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | sudo apt-key add -
-  sudo wget -q -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list
-  sudo apt-get -q update && sudo apt-get -q install s3cmd
+function update_s3cfg {
   sed -i "s/^access_key = */access_key = $AWS_ACCESS_KEY_ID/" .s3cfg
   sed -i "s/^secret_key = */secret_key = $AWS_SECRET_ACCESS_KEY/" .s3cfg
+  sed -i "s/S3_BUCKET/$S3_BUCKET/" build-rpm.sh
 }
 
 function vagrant_up {
@@ -27,24 +25,12 @@ function vagrant_up {
 }
 
 function build_rpm {
-  scp -F .vagrant.ssh.config build-rpm.sh ruby200.spec default:~/
+  scp -F .vagrant.ssh.config build-rpm.sh ruby200.spec .s3cfg default:~/
   vagrant ssh -c '/bin/bash ~/build-rpm.sh'
-  scp -F .vagrant.ssh.config default:~/rpm/RPMS/x86_64/*.rpm .
-  scp -F .vagrant.ssh.config default:~/rpm/SRPMS/*.rpm .
-}
-
-function upload_rpm {
-  s3cmd -c .s3cfg put --acl-public --force *.rpm s3://$S3_BUCKET/
-}
-
-function terminate {
-  ssh -t -t -F .vagrant.ssh.config default 'sudo shutdown -h now'
 }
 
 install_vagrant
 install_ec2_key
 vagrant_up
+update_s3cfg
 build_rpm
-install_s3cmd
-upload_rpm
-terminate
