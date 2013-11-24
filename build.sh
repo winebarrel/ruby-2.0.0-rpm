@@ -14,7 +14,7 @@ function install_ec2_key {
 
 function install_s3cmd {
   wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | sudo apt-key add -
-  sudo wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list
+  sudo wget -q -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list
   sudo apt-get -q update && sudo apt-get -q install s3cmd
 }
 
