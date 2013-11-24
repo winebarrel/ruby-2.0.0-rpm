@@ -15,13 +15,13 @@ function install_ec2_key {
 function install_s3cmd {
   wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | sudo apt-key add -
   sudo wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list
-  sudo apt-get update && sudo apt-get install s3cmd
+  sudo apt-get -q update && sudo apt-get -q install s3cmd
 }
 
 function vagrant_up {
   vagrant up --provider=aws 2> /dev/null || true
-  vagrant ssh -c 'sudo sed -i /requiretty/d /etc/sudoers' || true
   vagrant ssh-config > .vagrant.ssh.config
+  ssh -t -F .vagrant.ssh.config 'sudo sed -i /requiretty/d /etc/sudoers'
 }
 
 function build_rpm {
