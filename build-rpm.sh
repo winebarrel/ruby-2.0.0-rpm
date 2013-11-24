@@ -8,6 +8,8 @@ mv ~/ruby200.spec ~/rpm/SPECS
 cd rpm
 wget -q -O ./SOURCES/ruby-2.0.0-p353.tar.gz http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz
 rpmbuild -ba ./SPECS/ruby200.spec
+echo s3://S3_BUCKET/
+s3cmd -c ~/.s3cfg ls s3://S3_BUCKET/
 s3cmd -c ~/.s3cfg put --acl-public --force ~/rpm/RPMS/x86_64/*.rpm s3://S3_BUCKET/
 s3cmd -c ~/.s3cfg put --acl-public --force ~/rpm/SRPMS/*.rpm s3://S3_BUCKET/
 sudo shutdown -h now
