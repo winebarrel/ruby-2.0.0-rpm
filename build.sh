@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -v
 
 function install_vagrant {
   wget -q $VAGRANT_URL
