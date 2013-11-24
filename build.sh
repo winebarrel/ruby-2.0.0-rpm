@@ -21,7 +21,7 @@ function install_s3cmd {
 function vagrant_up {
   vagrant up --provider=aws 2> /dev/null || true
   vagrant ssh-config > .vagrant.ssh.config
-  ssh -t -F .vagrant.ssh.config 'sudo sed -i /requiretty/d /etc/sudoers'
+  ssh -t -F .vagrant.ssh.config default 'sudo sed -i /requiretty/d /etc/sudoers'
 }
 
 function build_rpm {
