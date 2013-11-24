@@ -27,6 +27,8 @@ function vagrant_up {
 function build_rpm {
   scp -F .vagrant.ssh.config build-rpm.sh ruby200.spec default:~/
   vagrant ssh -c '/bin/bash ~/build-rpm.sh'
+  scp -F .vagrant.ssh.config default:~/rpm/RPSM/x86_64/*.rpm .
+  scp -F .vagrant.ssh.config default:~/rpm/SRPSM/*.rpm .
 }
 
 function terminate {
