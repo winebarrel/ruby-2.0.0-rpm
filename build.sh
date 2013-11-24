@@ -22,7 +22,7 @@ function vagrant_up {
   vagrant up --provider=aws 2> /dev/null || true
   vagrant ssh-config > .vagrant.ssh.config
   ssh -t -F .vagrant.ssh.config default 'sudo sed -i /requiretty/d /etc/sudoers'
-  vagrant reload
+  vagrant reload 2> /dev/null || true
 }
 
 function build_rpm {
