@@ -34,7 +34,7 @@ function build_rpm {
 }
 
 function upload_rpm {
-  s3cmd -c .s3cfg put --acl-public *.rpm s3://$S3_BUCKET/
+  s3cmd -c .s3cfg put --acl-public --force *.rpm s3://$S3_BUCKET/
 }
 
 function terminate {
