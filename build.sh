@@ -23,7 +23,7 @@ function vagrant_up {
   vagrant ssh-config > .vagrant.ssh.config
   echo ls
   ssh -t -F .vagrant.ssh.config default 'sudo ls'
-  ssh -t -F .vagrant.ssh.config default 'sudo sed -i /requiretty/d /etc/sudoers'
+  ssh -t -t -F .vagrant.ssh.config default 'sudo sed -i /requiretty/d /etc/sudoers'
   echo ls
   ssh -t -F .vagrant.ssh.config default 'sudo ls'
 }
