@@ -26,12 +26,16 @@ function vagrant_up {
 }
 
 function build_rpm {
-  cat .vagrant.ssh.config
   scp -F .vagrant.ssh.config build-rpm.sh ruby200.spec default:~/
   vagrant ssh -c '/bin/bash ~/build-rpm.sh'
+}
+
+function terminate {
+  ssh -t -t -F .vagrant.ssh.config default 'sudo shutdown -h now'
 }
 
 install_vagrant
 install_ec2_key
 vagrant_up
 build_rpm
+terminate
