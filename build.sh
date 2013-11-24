@@ -9,5 +9,5 @@ chmod 600 $EC2_KEY_NAME
 vagrant up --provider=aws 2> /dev/null || echo
 vagrant ssh-config > .vagrant.ssh.config
 scp -F .vagrant.ssh.config build-rpm.sh default:~/
-vagrant ssh -c bash ~/build-rpm.sh
+vagrant ssh -c '/bin/bash ~/build-rpm.sh'
 vagrant destroy
