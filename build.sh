@@ -21,11 +21,15 @@ function install_s3cmd {
 function vagrant_up {
   vagrant up --provider=aws 2> /dev/null || true
   vagrant ssh-config > .vagrant.ssh.config
+  echo ls
+  ssh -t -F .vagrant.ssh.config default 'sudo ls'
   ssh -t -F .vagrant.ssh.config default 'sudo sed -i /requiretty/d /etc/sudoers'
-  vagrant reload 2> /dev/null || true
+  echo ls
+  ssh -t -F .vagrant.ssh.config default 'sudo ls'
 }
 
 function build_rpm {
+  cat .vagrant.ssh.config
   scp -F .vagrant.ssh.config build-rpm.sh ruby200.spec default:~/
   vagrant ssh -c '/bin/bash ~/build-rpm.sh'
 }
