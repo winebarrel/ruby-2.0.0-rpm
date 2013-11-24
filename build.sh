@@ -1,4 +1,5 @@
 #!/bin/bash
+set -v
 function install_vagrant {
   wget -q $VAGRANT_URL
   sudo dpkg -i `basename $VAGRANT_URL`
@@ -21,11 +22,7 @@ function install_s3cmd {
 function vagrant_up {
   vagrant up --provider=aws 2> /dev/null || true
   vagrant ssh-config > .vagrant.ssh.config
-  echo ls
-  ssh -t -F .vagrant.ssh.config default 'sudo ls'
   ssh -t -t -F .vagrant.ssh.config default 'sudo sed -i /requiretty/d /etc/sudoers'
-  echo ls
-  ssh -t -F .vagrant.ssh.config default 'sudo ls'
 }
 
 function build_rpm {
@@ -34,12 +31,7 @@ function build_rpm {
   vagrant ssh -c '/bin/bash ~/build-rpm.sh'
 }
 
-function vagrant_destroy {
-  vagrant destroy
-}
-
 install_vagrant
 install_ec2_key
 vagrant_up
 build_rpm
-vagrant_destroy
