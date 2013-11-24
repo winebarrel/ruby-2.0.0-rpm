@@ -13,8 +13,8 @@ function install_ec2_key {
 }
 
 function update_s3cfg {
-  sed -i "s/^access_key = */access_key = $AWS_ACCESS_KEY_ID/" .s3cfg
-  sed -i "s/^secret_key = */secret_key = ${AWS_SECRET_ACCESS_KEY//\//\\\/}/" .s3cfg
+  sed -i "s|^access_key = *|access_key = $AWS_ACCESS_KEY_ID|" .s3cfg
+  sed -i "s|^secret_key = *|secret_key = $AWS_SECRET_ACCESS_KEY|" .s3cfg
   sed -i "s/S3_BUCKET/$S3_BUCKET/" build-rpm.sh
 }
 
