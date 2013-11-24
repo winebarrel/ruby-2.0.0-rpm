@@ -11,7 +11,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.keypair_name = ENV["EC2_KEY_NAME"]
     aws.instance_type = "t1.micro"
     aws.region = "ap-northeast-1"
-    aws.terminate_on_shutdown = true
     aws.ami = ENV["EC2_AMI_ID"]
 
     override.ssh.username = "ec2-user"
