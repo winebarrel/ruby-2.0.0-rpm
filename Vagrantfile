@@ -12,9 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = "c1.xlarge"
     aws.region = "ap-northeast-1"
     aws.terminate_on_shutdown = true
-    aws.ami = ENV["EC2_AMI_ID"]
+    aws.ami = "ami-31e86030"
 
-    override.ssh.username = "ec2-user"
+    override.ssh.username = "root"
     override.ssh.private_key_path = ENV["EC2_KEY_NAME"]
   end
 end

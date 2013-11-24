@@ -1,5 +1,7 @@
 #!/bin/bash
 chmod 600 ~/.s3cfg
+wget -q http://ftp.riken.jp/Linux/fedora/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -ivh epel-release-6-8.noarch.rpm
 sudo yum install -y rpm-build readline readline-devel ncurses ncurses-devel gdbm gdbm-devel glibc-devel tcl-devel gcc unzip openssl-devel db4-devel byacc make libyaml libyaml-devel libffi libffi-devel
 sudo yum install -y --enablerepo=epel s3cmd
 mkdir -p ~/rpm/{BUILD,SRPMS,SPECS,SOURCES,RPMS}
