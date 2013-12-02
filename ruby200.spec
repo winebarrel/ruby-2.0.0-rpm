@@ -3,7 +3,7 @@
 
 Name:           ruby
 Version:        %{rubyver}%{rubyminorver}
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        Ruby License/GPL - see COPYING
 URL:            http://www.ruby-lang.org/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -58,10 +58,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-, root, root)
-%{_bindir}
-%{_includedir}
-%{_datadir}
-%{_libdir}
+%{_bindir}/*
+%{_includedir}/*
+%{_datadir}/*
+%{_libdir}/*
 
 %changelog
 * Sat Nov 23 2013 Masahito Yoshida <masahito@axsh.net> - 2.0.0-p353
